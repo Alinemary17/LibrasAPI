@@ -1,0 +1,59 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.1.6.RELEASE")
+
+    }
+}
+plugins {
+    id 'java'
+    id "org.springframework.boot" version "2.1.6.RELEASE"
+    id 'application'
+}
+
+application {
+    mainClassName = 'com.aline/Main'
+}
+
+
+
+
+group 'com.aline'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    maven { url "https://jitpack.io" }
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '2.1.6.RELEASE'
+    compile('org.springframework.boot:spring-boot-starter-data-jpa') {
+        exclude module: 'spring-boot-starter-logging'
+    }
+    compile('org.springframework.boot:spring-boot-starter-web:2.1.6.RELEASE') {
+        exclude module: 'spring-boot-starter-logging'
+    }
+    compile group: 'org.hibernate', name: 'hibernate-core', version: '5.4.2.Final'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-log4j2', version: '2.1.6.RELEASE'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.11.2'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.11.2'
+    compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.20'
+
+}
+
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+bootJar {
+    baseName = 'gs-rest-service'
+    version = '0.1.0'
+}
+
+compileJava.options.encoding = 'UTF-8'
